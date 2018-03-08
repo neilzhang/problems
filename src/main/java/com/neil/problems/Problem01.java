@@ -13,7 +13,7 @@ public class Problem01 {
 
     private void solve() {
         Exam exam = new Exam();
-        exam.addQuestion(new Question(exam, 1) {
+        exam.addQuestion(new Question(1, exam) {
 
             @Override
             public int complexity() {
@@ -21,31 +21,31 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 switch (result) {
                     case "A":
-                        doCase(guess, guesses);
+                        doCase(answer, answers);
                         break;
                     case "B":
-                        doCase(guess, guesses);
+                        doCase(answer, answers);
                         break;
                     case "C":
-                        doCase(guess, guesses);
+                        doCase(answer, answers);
                         break;
                     case "D":
-                        doCase(guess, guesses);
+                        doCase(answer, answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, List<Guess> guesses) {
-                guesses.add(guess.copy());
+            private void doCase(Answer answer, List<Answer> answers) {
+                answers.add(answer.copy());
             }
 
         });
-        exam.addQuestion(new Question(exam, 2) {
+        exam.addQuestion(new Question(2, exam) {
 
             @Override
             public int complexity() {
@@ -53,34 +53,34 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 switch (result) {
                     case "A":
-                        doCase(guess, 5, "C", guesses);
+                        doCase(answer, 5, "C", answers);
                         break;
                     case "B":
-                        doCase(guess, 5, "D", guesses);
+                        doCase(answer, 5, "D", answers);
                         break;
                     case "C":
-                        doCase(guess, 5, "A", guesses);
+                        doCase(answer, 5, "A", answers);
                         break;
                     case "D":
-                        doCase(guess, 5, "B", guesses);
+                        doCase(answer, 5, "B", answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, int q1, String choice, List<Guess> guesses) {
-                Guess copy = guess.copy();
-                if (copy.setResult(q1, choice)) {
-                    guesses.add(copy);
+            private void doCase(Answer answer, int q1, String choice, List<Answer> answers) {
+                Answer copy = answer.copy();
+                if (copy.guess(q1, choice)) {
+                    answers.add(copy);
                 }
             }
 
         });
-        exam.addQuestion(new Question(exam, 3) {
+        exam.addQuestion(new Question(3, exam) {
 
             @Override
             public int complexity() {
@@ -88,33 +88,33 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 switch (result) {
                     case "A":
-                        doCase(guess, 6, 2, 4, 3, guesses);
+                        doCase(answer, 6, 2, 4, 3, answers);
                         break;
                     case "B":
-                        doCase(guess, 3, 2, 4, 6, guesses);
+                        doCase(answer, 3, 2, 4, 6, answers);
                         break;
                     case "C":
-                        doCase(guess, 3, 6, 4, 2, guesses);
+                        doCase(answer, 3, 6, 4, 2, answers);
                         break;
                     case "D":
-                        doCase(guess, 3, 6, 2, 4, guesses);
+                        doCase(answer, 3, 6, 2, 4, answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, int q1, int q2, int q3, int q4, List<Guess> guesses) {
+            private void doCase(Answer answer, int q1, int q2, int q3, int q4, List<Answer> answers) {
                 String[] choices = getChoices();
                 for (String choice1 : choices) {
-                    Guess copy = guess.copy();
-                    if (copy.setResult(q1, choice1) && copy.setResult(q2, choice1) && copy.setResult(q3, choice1)) {
+                    Answer copy = answer.copy();
+                    if (copy.guess(q1, choice1) && copy.guess(q2, choice1) && copy.guess(q3, choice1)) {
                         for (String choice2 : choices) {
-                            if (!choice2.equals(choice1) && copy.setResult(q4, choice2)) {
-                                guesses.add(copy);
+                            if (!choice2.equals(choice1) && copy.guess(q4, choice2)) {
+                                answers.add(copy);
                             }
                         }
                     }
@@ -122,7 +122,7 @@ public class Problem01 {
             }
 
         });
-        exam.addQuestion(new Question(exam, 4) {
+        exam.addQuestion(new Question(4, exam) {
 
             @Override
             public int complexity() {
@@ -130,37 +130,37 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 switch (result) {
                     case "A":
-                        doCase(guess, 1, 5, guesses);
+                        doCase(answer, 1, 5, answers);
                         break;
                     case "B":
-                        doCase(guess, 2, 7, guesses);
+                        doCase(answer, 2, 7, answers);
                         break;
                     case "C":
-                        doCase(guess, 1, 9, guesses);
+                        doCase(answer, 1, 9, answers);
                         break;
                     case "D":
-                        doCase(guess, 6, 10, guesses);
+                        doCase(answer, 6, 10, answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, int q1, int q2, List<Guess> guesses) {
+            private void doCase(Answer answer, int q1, int q2, List<Answer> answers) {
                 String[] choices = getChoices();
                 for (String choice : choices) {
-                    Guess copy = guess.copy();
-                    if (copy.setResult(q1, choice) && copy.setResult(q2, choice)) {
-                        guesses.add(copy);
+                    Answer copy = answer.copy();
+                    if (copy.guess(q1, choice) && copy.guess(q2, choice)) {
+                        answers.add(copy);
                     }
                 }
             }
 
         });
-        exam.addQuestion(new Question(exam, 5) {
+        exam.addQuestion(new Question(5, exam) {
 
             @Override
             public int complexity() {
@@ -168,34 +168,34 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 switch (result) {
                     case "A":
-                        doCase(guess, result, 8, guesses);
+                        doCase(answer, result, 8, answers);
                         break;
                     case "B":
-                        doCase(guess, result, 4, guesses);
+                        doCase(answer, result, 4, answers);
                         break;
                     case "C":
-                        doCase(guess, result, 9, guesses);
+                        doCase(answer, result, 9, answers);
                         break;
                     case "D":
-                        doCase(guess, result, 7, guesses);
+                        doCase(answer, result, 7, answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, String result, int q1, List<Guess> guesses) {
-                Guess copy = guess.copy();
-                if (copy.setResult(q1, result)) {
-                    guesses.add(copy);
+            private void doCase(Answer answer, String result, int q1, List<Answer> answers) {
+                Answer copy = answer.copy();
+                if (copy.guess(q1, result)) {
+                    answers.add(copy);
                 }
             }
 
         });
-        exam.addQuestion(new Question(exam, 6) {
+        exam.addQuestion(new Question(6, exam) {
 
             @Override
             public int complexity() {
@@ -203,38 +203,38 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 String[] choices = getChoices();
                 switch (result) {
                     case "A":
-                        doCase(guess, 2, 4, 8, guesses);
+                        doCase(answer, 2, 4, 8, answers);
                         break;
                     case "B":
-                        doCase(guess, 1, 6, 8, guesses);
+                        doCase(answer, 1, 6, 8, answers);
                         break;
                     case "C":
-                        doCase(guess, 3, 10, 8, guesses);
+                        doCase(answer, 3, 10, 8, answers);
                         break;
                     case "D":
-                        doCase(guess, 5, 9, 8, guesses);
+                        doCase(answer, 5, 9, 8, answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, int q1, int q2, int q3, List<Guess> guesses) {
+            private void doCase(Answer answer, int q1, int q2, int q3, List<Answer> answers) {
                 String[] choices = getChoices();
                 for (String choice : choices) {
-                    Guess copy = guess.copy();
-                    if (copy.setResult(q1, choice) && copy.setResult(q2, choice) && copy.setResult(q3, choice)) {
-                        guesses.add(copy);
+                    Answer copy = answer.copy();
+                    if (copy.guess(q1, choice) && copy.guess(q2, choice) && copy.guess(q3, choice)) {
+                        answers.add(copy);
                     }
                 }
             }
 
         });
-        exam.addQuestion(new Question(exam, 7) {
+        exam.addQuestion(new Question(7, exam) {
 
             @Override
             public int complexity() {
@@ -242,45 +242,53 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 switch (result) {
                     case "A":
-                        doCase(guess, "C", guesses);
+                        doCase(answer, "C", answers);
                         break;
                     case "B":
-                        doCase(guess, "B", guesses);
+                        doCase(answer, "B", answers);
                         break;
                     case "C":
-                        doCase(guess, "A", guesses);
+                        doCase(answer, "A", answers);
                         break;
                     case "D":
-                        doCase(guess, "D", guesses);
+                        doCase(answer, "D", answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, String choice, List<Guess> guesses) {
-                int count = 0;
-                List<Guess> results = new ArrayList<>();
-                for (int i = 1; i <= 10; i++) {
-                    Guess copy = guess.copy();
-                    if (copy.setResult(i, choice)) {
-                        results.add(copy);
-                        count++;
+            private void doCase(Answer answer, String result, List<Answer> answers) {
+                Exam exam = getExam();
+                String[] choices = getChoices();
+                if (answer.isFinished(exam)) {
+                    int minxCount = Integer.MAX_VALUE;
+                    for (String choice : choices) {
+                        int count = answer.count(choice);
+                        if (count < minxCount) {
+                            minxCount = count;
+                        }
+                    }
+                    if (minxCount == answer.count(result)) {
+                        answers.add(answer);
+                    }
+                } else {
+                    for (int i = 1; i <= 10; i++) {
+                        for (String choice : choices) {
+                            Answer copy = answer.copy();
+                            if (copy.guess(i, choice)) {
+                                answers.add(copy);
+                            }
+                        }
                     }
                 }
-                if (count <= 1) {
-                    guesses.add(guess.copy());
-                } else {
-                    guesses.addAll(results); //增加一些猜测
-                    guesses.add(guess.copy());
-                }
             }
 
         });
-        exam.addQuestion(new Question(exam, 8) {
+        exam.addQuestion(new Question(8, exam) {
 
             @Override
             public int complexity() {
@@ -288,55 +296,55 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
-                Guess copy;
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
+                Answer copy;
                 switch (result) {
                     case "A":
-                        doCase(guess, 1, 7, guesses);
+                        doCase(answer, 1, 7, answers);
                         break;
                     case "B":
-                        doCase(guess, 1, 5, guesses);
+                        doCase(answer, 1, 5, answers);
                         break;
                     case "C":
-                        doCase(guess, 1, 2, guesses);
+                        doCase(answer, 1, 2, answers);
                         break;
                     case "D":
-                        doCase(guess, 1, 10, guesses);
+                        doCase(answer, 1, 10, answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, int q1, int q2, List<Guess> guesses) {
-                Guess copy = guess.copy();
-                if (copy.setResult(q1, "A") && copy.setResult(q2, "C")) {
-                    guesses.add(copy);
+            private void doCase(Answer answer, int q1, int q2, List<Answer> answers) {
+                Answer copy = answer.copy();
+                if (copy.guess(q1, "A") && copy.guess(q2, "C")) {
+                    answers.add(copy);
                 }
-                copy = guess.copy();
-                if (copy.setResult(q1, "C") && copy.setResult(q2, "A")) {
-                    guesses.add(copy);
+                copy = answer.copy();
+                if (copy.guess(q1, "C") && copy.guess(q2, "A")) {
+                    answers.add(copy);
                 }
-                copy = guess.copy();
-                if (copy.setResult(q1, "B") && copy.setResult(q2, "D")) {
-                    guesses.add(copy);
+                copy = answer.copy();
+                if (copy.guess(q1, "B") && copy.guess(q2, "D")) {
+                    answers.add(copy);
                 }
-                copy = guess.copy();
-                if (copy.setResult(q1, "D") && copy.setResult(q2, "B")) {
-                    guesses.add(copy);
+                copy = answer.copy();
+                if (copy.guess(q1, "D") && copy.guess(q2, "B")) {
+                    answers.add(copy);
                 }
-                copy = guess.copy();
-                if (copy.setResult(q1, "A") && copy.setResult(q2, "D")) {
-                    guesses.add(copy);
+                copy = answer.copy();
+                if (copy.guess(q1, "A") && copy.guess(q2, "D")) {
+                    answers.add(copy);
                 }
-                copy = guess.copy();
-                if (copy.setResult(q1, "D") && copy.setResult(q2, "A")) {
-                    guesses.add(copy);
+                copy = answer.copy();
+                if (copy.guess(q1, "D") && copy.guess(q2, "A")) {
+                    answers.add(copy);
                 }
             }
 
         });
-        exam.addQuestion(new Question(exam, 9) {
+        exam.addQuestion(new Question(9, exam) {
 
             @Override
             public int complexity() {
@@ -344,39 +352,39 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 switch (result) {
                     case "A":
-                        doCase(guess, 6, guesses);
+                        doCase(answer, 6, answers);
                         break;
                     case "B":
-                        doCase(guess, 10, guesses);
+                        doCase(answer, 10, answers);
                         break;
                     case "C":
-                        doCase(guess, 2, guesses);
+                        doCase(answer, 2, answers);
                         break;
                     case "D":
-                        doCase(guess, 9, guesses);
+                        doCase(answer, 9, answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, int q1, List<Guess> guesses) {
+            private void doCase(Answer answer, int q1, List<Answer> answers) {
                 String[] choices = getChoices();
                 for (String choice1 : choices) {
-                    Guess copy = guess.copy();
-                    if (copy.setResult(1, choice1) && copy.setResult(6, choice1)) {
+                    Answer copy = answer.copy();
+                    if (copy.guess(1, choice1) && copy.guess(6, choice1)) {
                         for (String choice2 : choices) {
-                            if (copy.setResult(q1, choice2) != copy.setResult(5, choice2)) {
-                                guesses.add(copy);
+                            if (copy.guess(q1, choice2) != copy.guess(5, choice2)) {
+                                answers.add(copy);
                             }
                         }
                     } else {
                         for (String choice2 : choices) {
-                            if (copy.setResult(q1, choice2) == copy.setResult(5, choice2)) {
-                                guesses.add(copy);
+                            if (copy.guess(q1, choice2) == copy.guess(5, choice2)) {
+                                answers.add(copy);
                             }
                         }
                     }
@@ -384,7 +392,7 @@ public class Problem01 {
             }
 
         });
-        exam.addQuestion(new Question(exam, 10) {
+        exam.addQuestion(new Question(10, exam) {
 
             @Override
             public int complexity() {
@@ -392,40 +400,70 @@ public class Problem01 {
             }
 
             @Override
-            public List<Guess> calculate(String result, Guess guess) {
-                List<Guess> guesses = new ArrayList<>();
+            public List<Answer> calculate(String result, Answer answer) {
+                List<Answer> answers = new ArrayList<>();
                 switch (result) {
                     case "A":
+                        doCase(answer, 3, answers);
                         break;
                     case "B":
+                        doCase(answer, 2, answers);
                         break;
                     case "C":
+                        doCase(answer, 4, answers);
                         break;
                     case "D":
+                        doCase(answer, 1, answers);
                         break;
                 }
-                return guesses;
+                return answers;
             }
 
-            private void doCase(Guess guess, List<Guess> guesses) {
-
+            private void doCase(Answer answer, int diff, List<Answer> answers) {
+                Exam exam = getExam();
+                String[] choices = getChoices();
+                if (answer.isFinished(exam)) {
+                    int maxCount = 0;
+                    int minxCount = Integer.MAX_VALUE;
+                    for (String choice : choices) {
+                        int count = answer.count(choice);
+                        if (count > maxCount) {
+                            maxCount = count;
+                        }
+                        if (count < minxCount) {
+                            minxCount = count;
+                        }
+                    }
+                    if (maxCount - minxCount == diff) {
+                        answers.add(answer);
+                    }
+                } else {
+                    for (int i = 1; i <= 10; i++) {
+                        for (String choice : choices) {
+                            Answer copy = answer.copy();
+                            if (copy.guess(i, choice)) {
+                                answers.add(copy);
+                            }
+                        }
+                    }
+                }
             }
 
         });
         Examinee examinee = new Examinee();
-        List<Guess> guesses = examinee.complete(exam);
-        System.out.println(guesses);
+        Answer answer = examinee.complete(exam);
+        System.out.println(answer);
     }
 
     abstract class Question {
 
-        private Exam exam;
-
         private int qid;
 
-        public Question(Exam exam, int qid) {
-            this.exam = exam;
+        private Exam exam;
+
+        public Question(int qid, Exam exam) {
             this.qid = qid;
+            this.exam = exam;
         }
 
         public int getQid() {
@@ -440,35 +478,43 @@ public class Problem01 {
             return new String[]{"A", "B", "C", "D"};
         }
 
-        public List<Guess> verify(Guess guess) {
+        public List<Answer> verify(Answer answer) {
             int qid = getQid();
-            guess.verify(qid);
-            String result = guess.getResult(qid);
+            answer.verify(qid);
+            String result = answer.get(qid);
             if (result != null) {
-                return calculate(result, guess);
+                return calculate(result, answer);
             }
             return new ArrayList<>();
         }
 
         public abstract int complexity();
 
-        public abstract List<Guess> calculate(String result, Guess guess);
+        public abstract List<Answer> calculate(String result, Answer answer);
+
+        @Override
+        public String toString() {
+            return "Question{" +
+                    "qid=" + qid +
+                    ", exam=" + exam +
+                    '}';
+        }
     }
 
-    class Guess {
+    class Answer {
 
         private HashMap<Integer, String> results = new HashMap<>();
 
-        private ArrayList<Integer> verifyings = new ArrayList<>();
+        private ArrayList<Integer> verifications = new ArrayList<>();
 
-        public boolean setResult(int qid, String result) {
+        public boolean guess(int qid, String result) {
             if (result == null) {
                 throw new NullPointerException();
             }
-            String currentResult = getResult(qid);
+            String currentResult = results.get(qid);
             if (currentResult == null) {
                 results.put(qid, result);
-                verifyings.add(qid);
+                verifications.add(qid);
                 return true;
             } else if (result.equals(currentResult)) {
                 return true;
@@ -477,36 +523,69 @@ public class Problem01 {
             }
         }
 
-        public String getResult(int qid) {
+        public boolean verify(int qid) {
+            return verifications.remove((Object) qid);
+        }
+
+        public String get(int qid) {
             return results.get(qid);
         }
 
         public List<Integer> getVerifyingList() {
-            return verifyings;
-        }
-
-        public boolean verify(int qid) {
-            return verifyings.remove((Object) qid);
+            return new ArrayList<>(verifications);
         }
 
         public boolean isFinished(Exam exam) {
             List<Question> questions = exam.getQuestions();
             for (Question question : questions) {
                 int qid = question.getQid();
-                if (results.get(qid) == null || verifyings.indexOf(qid) != -1) {
+                if (results.get(qid) == null) {
                     return false;
                 }
             }
             return true;
         }
 
-        public Guess copy() {
-            Guess clone = new Guess();
+        public boolean isRight(Exam exam) {
+            return isFinished(exam) && verifications.isEmpty();
+        }
+
+        public int count(String result) {
+            int count = 0;
+            for (String item : results.values()) {
+                if (item.equals(result)) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public Answer copy() {
+            Answer clone = new Answer();
             clone.results = (HashMap<Integer, String>) this.results.clone();
-            clone.verifyings = (ArrayList<Integer>) this.verifyings.clone();
+            clone.verifications = (ArrayList<Integer>) this.verifications.clone();
             return clone;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Answer answer = (Answer) o;
+            return Objects.equals(results, answer.results);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(results);
+        }
+
+        @Override
+        public String toString() {
+            return "Answer{" +
+                    "results=" + results +
+                    '}';
+        }
     }
 
     class Exam {
@@ -527,13 +606,16 @@ public class Problem01 {
         public Question getQuestion(int qid) {
             return questionMap.get(qid);
         }
+
     }
 
     class Examinee {
 
-        private LinkedList<Guess> guessGuesses = new LinkedList<>();
+        private LinkedList<Answer> guessAnswers = new LinkedList<>();
 
-        public List<Guess> complete(Exam exam) {
+        private HashMap<Answer, Object> historyAnswers = new HashMap<>();
+
+        public Answer complete(Exam exam) {
             final String[] choices = new String[]{
                     "A", "B", "C", "D"
             };
@@ -546,23 +628,33 @@ public class Problem01 {
             });
             for (Question question : questions) {
                 for (String choice : choices) {
-                    Guess guess = new Guess();
-                    guess.setResult(question.getQid(), choice);
-                    guessGuesses.add(guess);
+                    Answer answer = new Answer();
+                    answer.guess(question.getQid(), choice);
+                    guessAnswers.add(answer);
                 }
             }
-            while (!guessGuesses.isEmpty()) {
-                Guess guess = guessGuesses.pop();
-                if (!guess.isFinished(exam)) {
-                    List<Integer> verifyingList = guess.getVerifyingList();
+            while (!guessAnswers.isEmpty()) {
+                Answer answer = guessAnswers.pop();
+                System.out.println(answer);
+                if (!answer.isRight(exam)) {
+                    List<Integer> verifyingList = answer.getVerifyingList();
                     for (int qid : verifyingList) {
                         Question question = exam.getQuestion(qid);
-                        List<Guess> guesses = question.verify(guess);
-                        guessGuesses.addAll(guesses);
+                        List<Answer> answers = question.verify(answer);
+                        for (Answer item : answers) {
+                            if (historyAnswers.containsKey(item)) {
+                                continue;
+                            } else {
+                                guessAnswers.add(item);
+                                historyAnswers.put(item, new Object());
+                            }
+                        }
                     }
+                } else {
+                    return answer;
                 }
             }
-            return guessGuesses;
+            return null;
         }
 
     }
